@@ -1,24 +1,13 @@
 /**
- * @description 通过react-app-rewired 覆盖create-react-app 的webpack 配置
+ * @description 通过customize-cra 配合react-app-rewired 覆盖create-react-app 的webpack 配置
  */
-
+const { override, useBabelRc, useEslintRc, addWebpackAlias } = require('customize-cra')
 const path = require('path')
-const rewirePostcss = require('react-app-rewire-postcss')
-const postcssNormalize = require('postcss-normalize')
 
-module.exports = function override(config, env) {
-  config.resolve.alias = {
-    ...config.resolve.alias,
+module.exports = override(
+  useBabelRc(),
+  useEslintRc(),
+  addWebpackAlias({
     '@': path.resolve(__dirname, 'src')
-  }
-
-  config = rewirePostcss(config, {
-    plugins: () => [postcssNormalize()]
   })
-
-  if (env === 'production') {
-    config.devtool = false
-  }
-
-  return config
-}
+)
