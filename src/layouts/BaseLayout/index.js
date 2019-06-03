@@ -1,9 +1,7 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
-class BaseLayout extends PureComponent {
-  render() {
-    return <>BaseLayout</>
-  }
+function BaseLayout(props) {
+  return <>{props.children}</>
 }
 
 export default BaseLayout

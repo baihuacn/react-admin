@@ -1,10 +1,10 @@
 import React from 'react'
-import { Button } from 'antd'
+import Router from './router'
 
 function App() {
   return (
     <>
-      <Button type="primary">react-admin</Button>
+      <Router />
     </>
   )
 }
