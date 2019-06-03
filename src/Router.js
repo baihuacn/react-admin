@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import _ from 'lodash'
-import BaseLayout from '@/layouts/BaseLayout'
 import routes from '@/config/routes'
 
 function getRoutes(routeTrees = []) {
