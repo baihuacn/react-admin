@@ -2,11 +2,11 @@ const routes = [
   {
     path: '/',
     layout: 'BaseLayout',
-    component: '@/pages/Dashboard'
+    component: './pages/Dashboard'
   },
   {
     path: '/login',
-    component: '@/pages/Login'
+    component: './pages/Login'
   }
 ]
 

@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import _ from 'lodash'
-import routes from '@/config/routes'
+import routes from './configs/routes'
 
 function getRoutes(routeTrees = []) {
   let routeList = []
@@ -16,16 +16,17 @@ function getRoutes(routeTrees = []) {
 
 function Router() {
   const routeList = getRoutes(routes)
-  const BaseLayout = lazy(() => import('@/layouts/BaseLayout'))
+  const BaseLayout = lazy(() => import('./layouts/BaseLayout'))
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div />}>
         <Switch>
           {routeList.map(item => {
-            const Component = lazy(() => import(item.component))
+            const Component = lazy(() => import(`${item.component}`))
             return (
               <Route
                 exact
+                key={item.path}
                 path={item.path}
                 render={() => {
                   if (item.layout === 'BaseLayout') {
