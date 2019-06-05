@@ -9,7 +9,7 @@ function getRoutes(routeTrees = []) {
     if (Array.isArray(item.routes)) {
       routeList.push(getRoutes(item.routes))
     }
-    routeList.push(_.pick(item, ['path', 'component']))
+    routeList.push(_.pick(item, ['path', 'component', 'layout']))
   })
   return routeList
 }
@@ -23,6 +23,7 @@ function Router() {
         <Switch>
           {routeList.map(item => {
             const Component = lazy(() => import(`${item.component}`))
+            console.log(item)
             return (
               <Route
                 exact
