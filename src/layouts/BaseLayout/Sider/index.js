@@ -1,17 +1,8 @@
 import React, { PureComponent } from 'react'
 import { Menu, Icon } from 'antd'
+import styles from './Sider.module.less'
 
 const { SubMenu, Item: MenuItem } = Menu
-
-const style = {
-  logo: {
-    padding: '14px 0',
-    fontSize: '20px',
-    fontWeight: '700',
-    textAlign: 'center',
-    color: '#fff'
-  }
-}
 
 class Sider extends PureComponent {
   state = {
@@ -65,11 +56,11 @@ class Sider extends PureComponent {
     })
   }
   render() {
-    const { style: siderStyle } = this.props
+    const { className } = this.props
     const { collapsed, menus } = this.state
     return (
-      <div style={siderStyle}>
-        <div style={style.logo}>React Admin</div>
+      <div className={className}>
+        <div className={styles.logo}>React Admin</div>
         <Menu mode="inline" theme="dark" inlineCollapsed={collapsed}>
           {this.renderMenus(menus)}
         </Menu>

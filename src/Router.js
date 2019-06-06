@@ -23,7 +23,6 @@ function Router() {
         <Switch>
           {routeList.map(item => {
             const Component = lazy(() => import(`${item.component}`))
-            console.log(item)
             return (
               <Route
                 exact

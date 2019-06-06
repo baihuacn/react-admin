@@ -3,9 +3,9 @@ import { Icon } from 'antd'
 
 class Header extends PureComponent {
   render() {
-    const { style } = this.props
+    const { className } = this.props
     return (
-      <div style={style}>
+      <div className={className}>
         <Icon type="menu-fold" />
         <div>
           <Icon type="search" />

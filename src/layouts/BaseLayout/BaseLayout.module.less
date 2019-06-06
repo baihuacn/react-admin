@@ -1,0 +1,25 @@
+@import '~configs/variables.less';
+
+.sider {
+  position: fixed;
+  width: 224px;
+  height: 100vh;
+  background-color: @menuBackgroundColor;
+  box-shadow: @boxRightShadow;
+}
+.main {
+  height: 100vh;
+  margin-left: 224px;
+}
+.header {
+  position: fixed;
+  height: 40px;
+  width: calc(100% - 224px);
+  box-shadow: @boxBottomShadow;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.content {
+  padding-top: 40px;
+}
