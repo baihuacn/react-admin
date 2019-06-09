@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import _ from 'lodash'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Exception from './pages/Exception'
 import routes from './configs/routes'
 
 function getRoutes(routeTrees = []) {
@@ -28,20 +29,21 @@ function Router() {
                 exact
                 key={item.path}
                 path={item.path}
-                render={() => {
+                render={props => {
                   if (item.layout === 'BaseLayout') {
                     return (
                       <BaseLayout>
-                        <Component />
+                        <Component {...props} />
                       </BaseLayout>
                     )
                   } else {
-                    return <Component />
+                    return <Component {...props} />
                   }
                 }}
               />
             )
           })}
+          <Route render={() => <Exception />} />
         </Switch>
       </Suspense>
     </BrowserRouter>
