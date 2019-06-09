@@ -2,24 +2,24 @@
 
 .sider {
   position: fixed;
-  width: 224px;
+  width: @siderWidth;
   height: 100vh;
   background-color: @menuBackgroundColor;
   box-shadow: @boxRightShadow;
 }
 .main {
   height: 100vh;
-  margin-left: 224px;
+  margin-left: @siderWidth;
 }
 .header {
   position: fixed;
-  height: 40px;
-  width: calc(100% - 224px);
+  height: @headerHeight;
+  width: calc(100% - @siderWidth);
   box-shadow: @boxBottomShadow;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .content {
-  padding-top: 40px;
+  padding-top: @headerHeight;
 }
