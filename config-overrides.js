@@ -13,6 +13,6 @@ module.exports = override(
   addLessLoader({
     strictMath: true,
     noIeCompat: true,
-    localIdentName: '[local]--[hash:base64:5]'
+    localIdentName: '[name]__[local]--[hash:base64:5]'
   })
 )
