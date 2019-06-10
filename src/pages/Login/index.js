@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { Form, Input, Button, Tooltip, Icon } from 'antd'
+import { Form, Input, Button, Tooltip, Icon, message } from 'antd'
+import { fetchLogin, fetchUserInfo } from '@/apis/account'
 import styles from './Login.module.less'
 
 const { Item: FormItem } = Form
@@ -10,9 +11,12 @@ class Login extends PureComponent {
       form: { validateFields }
     } = this.props
     e.preventDefault()
-    validateFields((err, values) => {
+    validateFields(async (err, values) => {
       if (!err) {
-        console.log(values)
+        const params = await fetchLogin(values)
+        const userInfo = await fetchUserInfo(params)
+        message.success('登录成功！')
+        console.log(userInfo)
       }
     })
   }

@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Modal, message } from 'antd'
 // 创建axios 实例
 const request = axios.create({
+  baseURL: '/api',
   headers: { Authorization: '' }
 })
 // 拦截请求
@@ -38,7 +39,7 @@ request.interceptors.response.use(
     } else if (data.code === 1000) {
       // 数据成功响应
       return Promise.resolve(data.data)
-    } else if (data.code === 4003) {
+    } else if (data.code === 4001) {
       // 请求认证失败
       Modal.destroyAll()
       Modal.error({
