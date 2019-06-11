@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Form, Input, Button, Tooltip, Icon, message } from 'antd'
-import { fetchLogin, fetchUserInfo } from '@/apis/account'
+import { fetchLogin, fetchUserInfo } from '@/services/account'
 import styles from './Login.module.less'
 
 const { Item: FormItem } = Form
