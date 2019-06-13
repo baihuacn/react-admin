@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Icon, Avatar, Dropdown, Menu, Badge } from 'antd'
 import Fullscreen from './Fullscreen'
-import { fetchUserInfo } from '@/apis/account'
+import { fetchUserInfo, fetchLogout } from '@/apis/account'
 import { updateAccountInfo } from '@/store/actions/account'
 import styles from './Header.module.less'
 
@@ -14,6 +14,12 @@ class Header extends PureComponent {
     const params = { token }
     const userInfo = await fetchUserInfo(params)
     dispatch(updateAccountInfo(userInfo))
+  }
+  handleLogout = async () => {
+    const { token, dispatch } = this.props
+    const params = { token }
+    await fetchLogout(params)
+    dispatch(updateAccountInfo({ token: '' }))
   }
   render() {
     const { className, avatar, name } = this.props
@@ -28,7 +34,7 @@ class Header extends PureComponent {
           个人设置
         </MenuItem>
         <MenuDivider />
-        <MenuItem>
+        <MenuItem onClick={this.handleLogout}>
           <Icon type="logout" />
           退出登录
         </MenuItem>

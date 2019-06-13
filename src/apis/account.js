@@ -7,3 +7,7 @@ export function fetchLogin(params) {
 export function fetchUserInfo(params) {
   return request.post('/userInfo', params)
 }
+
+export function fetchLogout(params) {
+  return request.post('/logout', params)
+}

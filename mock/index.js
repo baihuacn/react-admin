@@ -27,5 +27,16 @@ const proxy = {
       return res.send({ status: 'error', code: 4001 })
     }
   },
+  'POST /api/logout': (req, res) => {
+    const { token } = req.body
+    if (token === 'token') {
+      return res.send({
+        status: 'ok',
+        code: 1000,
+      })
+    } else {
+      return res.send({ status: 'error', code: 4001 })
+    }
+  },
 }
 module.exports = proxy
