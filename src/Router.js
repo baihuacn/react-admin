@@ -20,7 +20,7 @@ function Router() {
   const BaseLayout = lazy(() => import('./layouts/BaseLayout'))
   return (
     <BrowserRouter>
-      <Suspense fallback={<div />}>
+      <Suspense fallback={null}>
         <Switch>
           {routeList.map(item => {
             const Component = lazy(() => import(`${item.component}`))

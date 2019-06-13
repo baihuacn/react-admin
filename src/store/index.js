@@ -1,10 +1,11 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import createSagaMiddleware from 'redux-saga'
-import account from './account'
+import { createStore } from 'redux'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import reducers from './reducers'
 
-const rootReducer = combineReducers({ account })
-const sagaMiddleware = createSagaMiddleware()
-const initialState = {}
-const store = createStore(rootReducer, initialState, applyMiddleware(sagaMiddleware))
+const persistConfig = { key: 'root', storage }
+const persistedReducer = persistReducer(persistConfig, reducers)
 
-export default store
+export const store = createStore(persistedReducer)
+
+export const persistor = persistStore(store)

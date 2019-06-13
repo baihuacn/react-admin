@@ -1,0 +1,1 @@
+export const ACCOUNT_UP_INFO = 'ACCOUNT_UP_INFO'

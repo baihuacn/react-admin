@@ -1,20 +1,22 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 import { Icon, Avatar, Dropdown, Menu, Badge } from 'antd'
 import Fullscreen from './Fullscreen'
+import { fetchUserInfo } from '@/apis/account'
+import { updateAccountInfo } from '@/store/actions/account'
 import styles from './Header.module.less'
-import avatar from '@/assets/images/avatar.svg'
 
 const { Item: MenuItem, Divider: MenuDivider } = Menu
 
 class Header extends PureComponent {
-  state = {
-    avatar,
-    name: '白桦'
+  async componentDidMount() {
+    const { token, dispatch } = this.props
+    const params = { token }
+    const userInfo = await fetchUserInfo(params)
+    dispatch(updateAccountInfo(userInfo))
   }
-
   render() {
-    const { className } = this.props
-    const { avatar, name } = this.state
+    const { className, avatar, name } = this.props
     const dropDownMenu = (
       <Menu>
         <MenuItem>
@@ -41,7 +43,7 @@ class Header extends PureComponent {
           </Badge>
           <Dropdown overlay={dropDownMenu} placement="bottomRight">
             <div className={styles.avatar}>
-              <Avatar src={avatar} size="small" alt="头像" className={styles.img} />
+              <Avatar icon="user" src={avatar} size="small" alt="头像" className={styles.img} />
               <span className={styles.name}>{name}</span>
             </div>
           </Dropdown>
@@ -52,4 +54,9 @@ class Header extends PureComponent {
   }
 }
 
-export default Header
+export default connect(state => {
+  const {
+    account: { token, name, avatar },
+  } = state
+  return { token, name, avatar }
+})(Header)
