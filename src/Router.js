@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react'
-import _ from 'lodash'
+import { connect } from 'react-redux'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import _ from 'lodash'
 import Exception from './pages/Exception'
 import routes from './configs/routes'
 
@@ -15,7 +16,20 @@ function getRoutes(routeTrees = []) {
   return routeList
 }
 
-function Router() {
+function checkNotAllowed(menus, pathname) {
+  let routerMenus = []
+  menus.forEach(menu => {
+    const isRouter = !menus.some(item => item.pid === menu.id)
+    if (isRouter) {
+      routerMenus.push(menu)
+    }
+  })
+  const isAllowed = routerMenus.some(item => pathname.indexOf(item.path) === 0)
+  return !isAllowed && pathname !== '/'
+}
+
+function Router(props) {
+  const { menus } = props
   const routeList = getRoutes(routes)
   const BaseLayout = lazy(() => import('./layouts/BaseLayout'))
   return (
@@ -30,15 +44,20 @@ function Router() {
                 key={item.path}
                 path={item.path}
                 render={props => {
+                  const { pathname } = props.location
+                  // 判断路由是否是可访问的菜单下的路由
+                  const isNotAllowed = checkNotAllowed(menus, pathname)
+                  if (isNotAllowed) {
+                    return <Exception type="403" />
+                  }
                   if (item.layout === 'BaseLayout') {
                     return (
                       <BaseLayout>
                         <Component {...props} />
                       </BaseLayout>
                     )
-                  } else {
-                    return <Component {...props} />
                   }
+                  return <Component {...props} />
                 }}
               />
             )
@@ -50,4 +69,9 @@ function Router() {
   )
 }
 
-export default Router
+export default connect(state => {
+  const {
+    sider: { menus },
+  } = state
+  return { menus }
+})(Router)
