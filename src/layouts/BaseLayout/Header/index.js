@@ -4,6 +4,7 @@ import { Icon, Avatar, Dropdown, Menu, Badge } from 'antd'
 import Fullscreen from './Fullscreen'
 import { fetchUserInfo, fetchLogout } from '@/apis/account'
 import { updateAccountInfo } from '@/store/actions/account'
+import { updateSiderCollapsed } from '@/store/actions/sider'
 import styles from './Header.module.less'
 
 const { Item: MenuItem, Divider: MenuDivider } = Menu
@@ -15,14 +16,21 @@ class Header extends PureComponent {
     const userInfo = await fetchUserInfo(params)
     dispatch(updateAccountInfo(userInfo))
   }
+
   handleLogout = async () => {
     const { token, dispatch } = this.props
     const params = { token }
     await fetchLogout(params)
     dispatch(updateAccountInfo({ token: '' }))
   }
+
+  handleToggleCollapsed = () => {
+    const { collapsed, dispatch } = this.props
+    dispatch(updateSiderCollapsed(!collapsed))
+  }
+
   render() {
-    const { className, avatar, name } = this.props
+    const { className, style, avatar, name, collapsed } = this.props
     const dropDownMenu = (
       <Menu>
         <MenuItem>
@@ -40,9 +48,10 @@ class Header extends PureComponent {
         </MenuItem>
       </Menu>
     )
+    const foldType = collapsed ? 'menu-unfold' : 'menu-fold'
     return (
-      <div className={className}>
-        <Icon type="menu-fold" className={styles.fold} />
+      <div className={className} style={style}>
+        <Icon type={foldType} className={styles.fold} onClick={this.handleToggleCollapsed} />
         <div className={styles.userInfo}>
           <Badge count={0} title="未读消息" offset={[-8, 12]}>
             <Icon type="bell" className={styles.bell} />
@@ -63,6 +72,7 @@ class Header extends PureComponent {
 export default connect(state => {
   const {
     account: { token, name, avatar },
+    sider: { collapsed },
   } = state
-  return { token, name, avatar }
+  return { token, name, avatar, collapsed }
 })(Header)

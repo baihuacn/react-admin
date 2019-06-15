@@ -1,38 +1,28 @@
 import React, { PureComponent } from 'react'
+import { withRouter, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { Menu, Icon } from 'antd'
 import styles from './Sider.module.less'
 
 const { SubMenu, Item: MenuItem } = Menu
 
-class Sider extends PureComponent {
-  state = {
-    collapsed: false,
-    menus: [
-      {
-        icon: 'dashboard',
-        name: '工作台',
-        path: '/'
-      },
-      {
-        icon: 'form',
-        name: '表单页',
-        path: '/form',
-        subMenus: [
-          {
-            name: '基础表单',
-            path: '/form/basic-form'
-          },
-          {
-            name: '分布表单',
-            path: '/form/step-form'
-          }
-        ]
-      }
-    ]
+function getMenuTrees(menus, pid = -1) {
+  let targetMenus = []
+  for (const index in menus) {
+    const menu = menus[index]
+    if (menu.pid === pid) {
+      const remainingMenus = [...menus]
+      remainingMenus.splice(index, 1)
+      targetMenus.push({ ...menu, subMenus: getMenuTrees(remainingMenus, menu.id) })
+    }
   }
-  renderMenus = menus => {
-    return menus.map(item => {
-      if (Array.isArray(item.subMenus)) {
+  return targetMenus
+}
+
+class Sider extends PureComponent {
+  renderMenus = menuTrees => {
+    return menuTrees.map(item => {
+      if (item.subMenus.length > 0) {
         return (
           <SubMenu
             key={item.path}
@@ -49,24 +39,36 @@ class Sider extends PureComponent {
       }
       return (
         <MenuItem key={item.path}>
-          {item.icon && <Icon type={item.icon} />}
-          <span>{item.name}</span>
+          <Link to={item.path}>
+            {item.icon && <Icon type={item.icon} />}
+            <span>{item.name}</span>
+          </Link>
         </MenuItem>
       )
     })
   }
+
   render() {
-    const { className } = this.props
-    const { collapsed, menus } = this.state
+    const { style, className, collapsed, menus, location } = this.props
+    const menuTrees = getMenuTrees(menus)
+    const title = collapsed ? 'RA' : 'React Admin'
+    const selectedMenus = [location.pathname]
     return (
-      <div className={className}>
-        <div className={styles.logo}>React Admin</div>
-        <Menu mode="inline" theme="dark" inlineCollapsed={collapsed}>
-          {this.renderMenus(menus)}
+      <div className={className} style={style}>
+        <div className={styles.logo}>{title}</div>
+        <Menu selectedKeys={selectedMenus} mode="inline" theme="dark" inlineCollapsed={collapsed}>
+          {this.renderMenus(menuTrees)}
         </Menu>
       </div>
     )
   }
 }
 
-export default Sider
+export default withRouter(
+  connect(state => {
+    const {
+      sider: { collapsed, menus },
+    } = state
+    return { collapsed, menus }
+  })(Sider),
+)

@@ -1,0 +1,2 @@
+export const SIDER_UP_COLLAPSED = 'SIDER_UP_COLLAPSED'
+export const SIDER_UP_MENUS = 'SIDER_UP_MENUS'
