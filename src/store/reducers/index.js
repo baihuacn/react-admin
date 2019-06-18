@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import account from './account'
-import sider from './sider'
+import baseLayout from './baseLayout'
 
-const reducers = combineReducers({ account, sider })
+const reducers = combineReducers({ account, baseLayout })
 
 export default reducers

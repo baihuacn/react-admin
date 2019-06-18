@@ -3,10 +3,13 @@
  */
 import axios from 'axios'
 import { Modal, message } from 'antd'
+import { store } from '@/store'
+
+const state = store.getState()
 // 创建axios 实例
 const request = axios.create({
   baseURL: '/api',
-  headers: { Authorization: '' }
+  headers: { token: state.account.token },
 })
 // 拦截请求
 request.interceptors.request.use(
@@ -14,7 +17,7 @@ request.interceptors.request.use(
   error => {
     message.error('发送请求失败')
     return Promise.reject(error)
-  }
+  },
 )
 // 拦截响应
 request.interceptors.response.use(
@@ -47,7 +50,7 @@ request.interceptors.response.use(
         okText: '确定',
         onOk() {
           window.location.href = '/login'
-        }
+        },
       })
       return Promise.reject()
     } else {
@@ -59,7 +62,7 @@ request.interceptors.response.use(
   error => {
     message.error('服务器响应失败')
     return Promise.reject(error)
-  }
+  },
 )
 
 export default request

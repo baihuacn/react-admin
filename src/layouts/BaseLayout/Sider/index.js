@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Menu, Icon } from 'antd'
+import { fetchMenus } from '@/apis/baseLayout'
+import { updateBaseLayoutMenus } from '@/store/actions/baseLayout'
 import styles from './Sider.module.less'
 
 const { SubMenu, Item: MenuItem } = Menu
@@ -20,6 +22,11 @@ function getMenuTrees(menus, pid = -1) {
 }
 
 class Sider extends PureComponent {
+  async componentDidMount() {
+    const { dispatch } = this.props
+    const menus = await fetchMenus()
+    // dispatch(updateBaseLayoutMenus(menus))
+  }
   renderMenus = menuTrees => {
     return menuTrees.map(item => {
       if (item.subMenus.length > 0) {
@@ -67,7 +74,7 @@ class Sider extends PureComponent {
 export default withRouter(
   connect(state => {
     const {
-      sider: { collapsed, menus },
+      baseLayout: { collapsed, menus },
     } = state
     return { collapsed, menus }
   })(Sider),

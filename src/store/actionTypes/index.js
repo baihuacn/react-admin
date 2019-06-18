@@ -1,2 +1,2 @@
 export * from './account'
-export * from './sider'
+export * from './baseLayout'

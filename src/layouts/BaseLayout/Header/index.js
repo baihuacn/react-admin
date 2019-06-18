@@ -4,29 +4,27 @@ import { Icon, Avatar, Dropdown, Menu, Badge } from 'antd'
 import Fullscreen from './Fullscreen'
 import { fetchUserInfo, fetchLogout } from '@/apis/account'
 import { updateAccountInfo } from '@/store/actions/account'
-import { updateSiderCollapsed } from '@/store/actions/sider'
+import { updateBaseLayoutCollapsed } from '@/store/actions/baseLayout'
 import styles from './Header.module.less'
 
 const { Item: MenuItem, Divider: MenuDivider } = Menu
 
 class Header extends PureComponent {
   async componentDidMount() {
-    const { token, dispatch } = this.props
-    const params = { token }
-    const userInfo = await fetchUserInfo(params)
+    const { dispatch } = this.props
+    const userInfo = await fetchUserInfo()
     dispatch(updateAccountInfo(userInfo))
   }
 
   handleLogout = async () => {
-    const { token, dispatch } = this.props
-    const params = { token }
-    await fetchLogout(params)
+    const { dispatch } = this.props
+    await fetchLogout()
     dispatch(updateAccountInfo({ token: '' }))
   }
 
   handleToggleCollapsed = () => {
     const { collapsed, dispatch } = this.props
-    dispatch(updateSiderCollapsed(!collapsed))
+    dispatch(updateBaseLayoutCollapsed(!collapsed))
   }
 
   render() {
@@ -71,8 +69,8 @@ class Header extends PureComponent {
 
 export default connect(state => {
   const {
-    account: { token, name, avatar },
-    sider: { collapsed },
+    account: { name, avatar },
+    baseLayout: { collapsed },
   } = state
-  return { token, name, avatar, collapsed }
+  return { name, avatar, collapsed }
 })(Header)

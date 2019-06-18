@@ -11,8 +11,8 @@ const proxy = {
       return res.send({ status: 'error', code: 4001 })
     }
   },
-  'POST /api/userInfo': (req, res) => {
-    const { token } = req.body
+  'GET /api/userInfo': (req, res) => {
+    const { token } = req.headers
     if (token === 'token') {
       return res.send({
         status: 'ok',
@@ -28,11 +28,52 @@ const proxy = {
     }
   },
   'POST /api/logout': (req, res) => {
-    const { token } = req.body
+    const { token } = req.headers
     if (token === 'token') {
       return res.send({
         status: 'ok',
         code: 1000,
+      })
+    } else {
+      return res.send({ status: 'error', code: 4001 })
+    }
+  },
+  'GET /api/menus': (req, res) => {
+    const { token } = req.headers
+    if (token === 'token') {
+      return res.send({
+        status: 'ok',
+        code: 1000,
+        data: [
+          {
+            id: 1,
+            pid: -1,
+            icon: 'dashboard',
+            name: '工作台',
+            path: '/',
+          },
+          {
+            id: 2,
+            pid: -1,
+            icon: 'form',
+            name: '表单页',
+            path: '/form',
+          },
+          {
+            id: 3,
+            pid: 2,
+            icon: '',
+            name: '基础表单',
+            path: '/form/basic-form',
+          },
+          {
+            id: 4,
+            pid: 2,
+            icon: '',
+            name: '分布表单',
+            path: '/form/step-form',
+          },
+        ],
       })
     } else {
       return res.send({ status: 'error', code: 4001 })

@@ -25,7 +25,7 @@ function checkNotAllowed(menus, pathname) {
     }
   })
   const isAllowed = routerMenus.some(item => pathname.indexOf(item.path) === 0)
-  return !isAllowed && pathname !== '/'
+  return !isAllowed && pathname !== '/' && pathname !== '/login'
 }
 
 function Router(props) {
@@ -71,7 +71,7 @@ function Router(props) {
 
 export default connect(state => {
   const {
-    sider: { menus },
+    baseLayout: { menus },
   } = state
   return { menus }
 })(Router)
