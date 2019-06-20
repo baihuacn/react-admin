@@ -5,15 +5,19 @@ import axios from 'axios'
 import { Modal, message } from 'antd'
 import { store } from '@/store'
 
-const state = store.getState()
 // 创建axios 实例
 const request = axios.create({
   baseURL: '/api',
-  headers: { token: state.account.token },
 })
 // 拦截请求
 request.interceptors.request.use(
-  config => config,
+  config => {
+    const {
+      account: { token },
+    } = store.getState()
+    config.headers.token = token
+    return config
+  },
   error => {
     message.error('发送请求失败')
     return Promise.reject(error)

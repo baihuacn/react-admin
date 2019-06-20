@@ -6,12 +6,14 @@ import Header from './Header'
 import styles from './BaseLayout.module.less'
 
 class BaseLayout extends PureComponent {
-  render() {
-    const { token, collapsed, children, history } = this.props
+  componentDidUpdate() {
+    const { token, history } = this.props
     if (!token) {
       history.push('/login')
-      return null
     }
+  }
+  render() {
+    const { collapsed, children } = this.props
     let siderStyle = {}
     let mainStyle = {}
     let headerStyle = {}
