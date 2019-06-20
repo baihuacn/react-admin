@@ -4,7 +4,7 @@ const proxy = {
     if (password === '888888' && username === 'admin') {
       return res.send({
         status: 'ok',
-        code: 1000,
+        code: 0,
         data: { token: 'token' },
       })
     } else {
@@ -16,7 +16,7 @@ const proxy = {
     if (token === 'token') {
       return res.send({
         status: 'ok',
-        code: 1000,
+        code: 0,
         data: {
           id: 'id',
           name: '白桦的账号',
@@ -32,7 +32,7 @@ const proxy = {
     if (token === 'token') {
       return res.send({
         status: 'ok',
-        code: 1000,
+        code: 0,
       })
     } else {
       return res.send({ status: 'error', code: 4001 })
@@ -43,7 +43,7 @@ const proxy = {
     if (token === 'token') {
       return res.send({
         status: 'ok',
-        code: 1000,
+        code: 0,
         data: [
           {
             id: 1,

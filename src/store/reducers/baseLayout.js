@@ -1,8 +1,7 @@
-import { BASELAYOUT_UP_COLLAPSED, BASELAYOUT_UP_MENUS } from '../actionTypes'
+import { BASELAYOUT_UP_COLLAPSED } from '../actionTypes'
 
 const initialState = {
   collapsed: false,
-  menus: [],
 }
 
 export default (state = initialState, action) => {
@@ -11,12 +10,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         collapsed: action.payload,
-      }
-    case BASELAYOUT_UP_MENUS:
-      console.log(action.payload)
-      return {
-        ...state,
-        menus: action.payload,
       }
     default:
       return state

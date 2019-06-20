@@ -2,24 +2,19 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Icon, Avatar, Dropdown, Menu, Badge } from 'antd'
 import Fullscreen from './Fullscreen'
-import { fetchUserInfo, fetchLogout } from '@/apis/account'
-import { updateAccountInfo } from '@/store/actions/account'
+import { fetchLogout } from '@/apis/account'
+import { updateAccountToken } from '@/store/actions/account'
 import { updateBaseLayoutCollapsed } from '@/store/actions/baseLayout'
 import styles from './Header.module.less'
 
 const { Item: MenuItem, Divider: MenuDivider } = Menu
 
 class Header extends PureComponent {
-  async componentDidMount() {
-    const { dispatch } = this.props
-    const userInfo = await fetchUserInfo()
-    dispatch(updateAccountInfo(userInfo))
-  }
-
   handleLogout = async () => {
     const { dispatch } = this.props
     await fetchLogout()
-    dispatch(updateAccountInfo({ token: '' }))
+    const token = ''
+    dispatch(updateAccountToken(token))
   }
 
   handleToggleCollapsed = () => {
@@ -69,7 +64,9 @@ class Header extends PureComponent {
 
 export default connect(state => {
   const {
-    account: { name, avatar },
+    account: {
+      userInfo: { name, avatar },
+    },
     baseLayout: { collapsed },
   } = state
   return { name, avatar, collapsed }

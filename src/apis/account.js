@@ -4,10 +4,14 @@ export function fetchLogin(params) {
   return request.post('/login', params)
 }
 
+export function fetchLogout(params) {
+  return request.post('/logout', params)
+}
+
 export function fetchUserInfo(params) {
   return request.get('/userInfo', { params })
 }
 
-export function fetchLogout(params) {
-  return request.post('/logout', params)
+export function fetchMenus(params) {
+  return request.get('/menus', { params })
 }

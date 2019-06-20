@@ -71,7 +71,7 @@ function Router(props) {
 
 export default connect(state => {
   const {
-    baseLayout: { menus },
+    account: { menus },
   } = state
   return { menus }
 })(Router)

@@ -39,7 +39,7 @@ request.interceptors.response.use(
           }
         }
       })
-    } else if (data.code === 1000) {
+    } else if (data.code === 0) {
       // 数据成功响应
       return Promise.resolve(data.data)
     } else if (data.code === 4001) {
