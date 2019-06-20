@@ -1,13 +1,13 @@
 const routes = [
   {
     path: '/',
-    layout: 'BaseLayout',
-    component: './pages/Dashboard'
+    layout: './layouts/BaseLayout',
+    component: './pages/Dashboard',
   },
   {
     path: '/login',
-    component: './pages/Login'
-  }
+    component: './pages/Login',
+  },
 ]
 
 export default routes

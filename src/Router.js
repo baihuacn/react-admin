@@ -31,13 +31,12 @@ function checkNotAllowed(menus, pathname) {
 function Router(props) {
   const { menus } = props
   const routeList = getRoutes(routes)
-  const BaseLayout = lazy(() => import('./layouts/BaseLayout'))
   return (
     <BrowserRouter>
       <Suspense fallback={null}>
         <Switch>
           {routeList.map(item => {
-            const Component = lazy(() => import(`${item.component}`))
+            const Page = lazy(() => import(`${item.component}`))
             return (
               <Route
                 exact
@@ -50,14 +49,15 @@ function Router(props) {
                   if (isNotAllowed) {
                     return <Exception type="403" />
                   }
-                  if (item.layout === 'BaseLayout') {
+                  if (item.layout) {
+                    const Layout = lazy(() => import(`${item.layout}`))
                     return (
-                      <BaseLayout>
-                        <Component {...props} />
-                      </BaseLayout>
+                      <Layout>
+                        <Page {...props} />
+                      </Layout>
                     )
                   }
-                  return <Component {...props} />
+                  return <Page {...props} />
                 }}
               />
             )
