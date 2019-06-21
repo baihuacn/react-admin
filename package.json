@@ -33,7 +33,7 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
-  "husk": {
+  "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
