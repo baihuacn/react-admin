@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Icon, Avatar, Dropdown, Menu, Badge } from 'antd'
 import Fullscreen from './Fullscreen'
+import BreadcrumbBar from './BreadcrumbBar'
 import { fetchLogout } from '@/apis/account'
 import { updateAccountToken } from '@/store/actions/account'
 import { updateBaseLayoutCollapsed } from '@/store/actions/baseLayout'
@@ -44,7 +45,10 @@ class Header extends PureComponent {
     const foldType = collapsed ? 'menu-unfold' : 'menu-fold'
     return (
       <div className={className} style={style}>
-        <Icon type={foldType} className={styles.fold} onClick={this.handleToggleCollapsed} />
+        <div className={styles.breadcrumbBar}>
+          <Icon type={foldType} className={styles.fold} onClick={this.handleToggleCollapsed} />
+          <BreadcrumbBar />
+        </div>
         <div className={styles.userInfo}>
           <Badge count={0} title="未读消息" offset={[-8, 12]}>
             <Icon type="bell" className={styles.bell} />

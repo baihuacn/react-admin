@@ -7,6 +7,7 @@ import { updateAccountToken, updateAccountInfo, updateAccountMenus } from '@/sto
 import styles from './Login.module.less'
 
 const { Item: FormItem } = Form
+const { Password: InputPassword } = Input
 
 class Login extends PureComponent {
   handleSubmit = e => {
@@ -47,7 +48,7 @@ class Login extends PureComponent {
                 placeholder="账号名称"
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 suffix={
-                  <Tooltip title="admin">
+                  <Tooltip title="名称：admin 密码：888888">
                     <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
                   </Tooltip>
                 }
@@ -58,15 +59,10 @@ class Login extends PureComponent {
             {getFieldDecorator('password', {
               rules: [{ required: true, message: '输入你的账号密码！' }],
             })(
-              <Input
+              <InputPassword
                 size="large"
                 placeholder="账号密码"
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                suffix={
-                  <Tooltip title="888888">
-                    <Icon type="info-circle" style={{ color: 'rgba(0,0,0,.45)' }} />
-                  </Tooltip>
-                }
               />,
             )}
           </FormItem>

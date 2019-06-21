@@ -5,9 +5,10 @@
 .fullscreen {
   height: @headerHeight;
   padding: 0 16px;
-  line-height: @headerHeight;
+  line-height: calc(@headerHeight + 4px);
 }
-.userInfo {
+.userInfo,
+.breadcrumbBar {
   display: flex;
   align-items: center;
 }
