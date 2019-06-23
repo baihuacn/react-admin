@@ -6,7 +6,13 @@ import Header from './Header'
 import styles from './BaseLayout.module.less'
 
 class BaseLayout extends PureComponent {
+  componentDidMount() {
+    this.handleCheckToken()
+  }
   componentDidUpdate() {
+    this.handleCheckToken()
+  }
+  handleCheckToken = () => {
     const { token, history } = this.props
     if (!token) {
       history.push('/login')
