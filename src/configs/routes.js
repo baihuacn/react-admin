@@ -1,17 +1,32 @@
+import React from 'react'
+const BaseLayout = React.lazy(() => import('@/layouts/BaseLayout'))
+
 const routes = [
   {
-    path: '/',
-    redirect: '/dashboard/analysis',
+    path: '/login',
+    component: './pages/Login',
   },
   {
     path: '/dashboard/analysis',
     name: '分析页',
-    layout: './layouts/BaseLayout',
+    layout: BaseLayout,
     component: './pages/Dashboard',
   },
   {
-    path: '/login',
-    component: './pages/Login',
+    path: '/dashboard/monitor',
+    name: '监控台',
+    layout: BaseLayout,
+    component: './pages/Dashboard',
+  },
+  {
+    path: '/dashboard/workplace',
+    name: '工作台',
+    layout: BaseLayout,
+    component: './pages/Dashboard',
+  },
+  {
+    path: '/',
+    redirect: '/dashboard/analysis',
   },
 ]
 

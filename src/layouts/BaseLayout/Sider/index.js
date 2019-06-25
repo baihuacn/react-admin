@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Menu, Icon } from 'antd'
+import { updateBaseLayoutSelectedKeys, updateBaseLayoutOpenKeys } from '@/store/actions/baseLayout'
 import styles from './Sider.module.less'
 
 const { SubMenu, Item: MenuItem } = Menu
@@ -20,6 +21,14 @@ function getMenuTrees(menus, pid = -1) {
 }
 
 class Sider extends PureComponent {
+  handleSelect = ({ selectedKeys }) => {
+    const { dispatch } = this.props
+    dispatch(updateBaseLayoutSelectedKeys(selectedKeys))
+  }
+  handleOpenChange = openKeys => {
+    const { dispatch } = this.props
+    dispatch(updateBaseLayoutOpenKeys(openKeys))
+  }
   renderMenus = menuTrees => {
     return menuTrees.map(item => {
       if (item.subMenus.length > 0) {
@@ -49,14 +58,21 @@ class Sider extends PureComponent {
   }
 
   render() {
-    const { style, className, collapsed, menus, location } = this.props
+    const { style, className, collapsed, menus, openKeys, selectedKeys } = this.props
     const menuTrees = getMenuTrees(menus)
     const title = collapsed ? 'RA' : 'React Admin'
-    const selectedMenus = [location.pathname]
     return (
       <div className={className} style={style}>
         <div className={styles.logo}>{title}</div>
-        <Menu selectedKeys={selectedMenus} mode="inline" theme="dark" inlineCollapsed={collapsed}>
+        <Menu
+          openKeys={openKeys}
+          selectedKeys={selectedKeys}
+          onSelect={this.handleSelect}
+          onOpenChange={this.handleOpenChange}
+          mode="inline"
+          theme="dark"
+          inlineCollapsed={collapsed}
+        >
           {this.renderMenus(menuTrees)}
         </Menu>
       </div>
@@ -68,8 +84,8 @@ export default withRouter(
   connect(state => {
     const {
       account: { menus },
-      baseLayout: { collapsed },
+      baseLayout: { collapsed, openKeys, selectedKeys },
     } = state
-    return { collapsed, menus }
+    return { collapsed, menus, openKeys, selectedKeys }
   })(Sider),
 )

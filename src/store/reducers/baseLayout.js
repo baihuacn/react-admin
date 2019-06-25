@@ -1,7 +1,9 @@
-import { BASELAYOUT_UP_COLLAPSED } from '../actionTypes'
+import { BASELAYOUT_UP_COLLAPSED, BASELAYOUT_UP_SELLECTEDKEYS, BASELAYOUT_UP_OPENKEYS } from '../actionTypes'
 
 const initialState = {
   collapsed: false,
+  selectedKeys: [],
+  openKeys: [],
 }
 
 export default (state = initialState, action) => {
@@ -10,6 +12,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         collapsed: action.payload,
+      }
+    case BASELAYOUT_UP_SELLECTEDKEYS:
+      return {
+        ...state,
+        selectedKeys: action.payload,
+      }
+    case BASELAYOUT_UP_OPENKEYS:
+      return {
+        ...state,
+        openKeys: action.payload,
       }
     default:
       return state
