@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@antv/g2": "^3.5.8-beta.1",
     "antd": "^3.19.1",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",

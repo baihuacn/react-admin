@@ -27,6 +27,9 @@ class BreadcrumbBar extends PureComponent {
     const pathSnippets = location.pathname.split('/').filter(i => i)
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {
       const url = `/${pathSnippets.slice(0, index + 1).join('/')}`
+      if (!breadcrumbNameMap[url]) {
+        return null
+      }
       const isRouter = breadcrumbNameMap[url].isRouter
       const isCurrent = pathSnippets.length - 1 === index
       const breadcrumbName = breadcrumbNameMap[url].name
