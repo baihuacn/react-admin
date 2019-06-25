@@ -1,20 +1,8 @@
 import React, { Suspense, lazy } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import _ from 'lodash'
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import Exception from './pages/Exception'
 import routes from './configs/routes'
-
-function getRoutes(routeTrees = []) {
-  let routeList = []
-  routeTrees.forEach(item => {
-    if (Array.isArray(item.routes)) {
-      routeList.push(getRoutes(item.routes))
-    }
-    routeList.push(_.pick(item, ['path', 'component', 'layout']))
-  })
-  return routeList
-}
 
 function checkNotAllowed(menus, pathname) {
   let routerMenus = []
@@ -30,22 +18,29 @@ function checkNotAllowed(menus, pathname) {
 
 function Router(props) {
   const { menus } = props
-  const routeList = getRoutes(routes)
   return (
     <BrowserRouter>
       <Suspense fallback={null}>
         <Switch>
-          {routeList.map(item => {
-            const Page = lazy(() => import(`${item.component}`))
+          {routes.map(item => {
+            if (!item.path) {
+              return null
+            }
+            if (item.redirect) {
+              return <Redirect exact key={item.path} from={item.path} to={item.redirect} />
+            }
             return (
               <Route
                 exact
                 key={item.path}
                 path={item.path}
                 render={props => {
-                  const { pathname } = props.location
+                  const Page = lazy(() => import(`${item.component}`))
+                  if (!Page) {
+                    return null
+                  }
                   // 判断路由是否是可访问的菜单下的路由
-                  const isNotAllowed = checkNotAllowed(menus, pathname)
+                  const isNotAllowed = checkNotAllowed(menus, item.path)
                   if (isNotAllowed) {
                     return <Exception type="403" />
                   }
