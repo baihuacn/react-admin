@@ -53,7 +53,7 @@ class Header extends PureComponent {
           <Badge count={0} title="未读消息" offset={[-8, 12]}>
             <Icon type="bell" className={styles.bell} />
           </Badge>
-          <Dropdown overlay={dropDownMenu} placement="bottomRight">
+          <Dropdown overlay={dropDownMenu} placement="bottomRight" trigger={['click']}>
             <div className={styles.avatar}>
               <Avatar icon="user" src={avatar} size="small" alt="头像" className={styles.img} />
               <span className={styles.name}>{name}</span>
