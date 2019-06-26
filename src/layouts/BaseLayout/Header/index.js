@@ -5,7 +5,7 @@ import Fullscreen from './Fullscreen'
 import BreadcrumbBar from './BreadcrumbBar'
 import { fetchLogout } from '@/apis/account'
 import { updateAccountToken } from '@/store/actions/account'
-import { updateBaseLayoutCollapsed } from '@/store/actions/baseLayout'
+import { updateBaseLayoutCollapsed, updateBaseLayoutOpenKeys } from '@/store/actions/baseLayout'
 import styles from './Header.module.less'
 
 const { Item: MenuItem, Divider: MenuDivider } = Menu
@@ -20,6 +20,9 @@ class Header extends PureComponent {
 
   handleToggleCollapsed = () => {
     const { collapsed, dispatch } = this.props
+    if (!collapsed) {
+      dispatch(updateBaseLayoutOpenKeys([]))
+    }
     dispatch(updateBaseLayoutCollapsed(!collapsed))
   }
 
