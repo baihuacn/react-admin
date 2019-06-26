@@ -40,17 +40,17 @@ class Router extends PureComponent {
                   key={item.path}
                   path={item.path}
                   render={props => {
-                    // 判断路由是否是可访问的菜单下的路由
-                    const isNotAllowed = checkNotAllowed(menus, item.path)
-                    if (isNotAllowed) {
-                      return <Exception type="403" />
-                    }
                     if (item.layout) {
                       return (
                         <item.layout>
                           <Component {...props} />
                         </item.layout>
                       )
+                    }
+                    // 判断路由是否是可访问的菜单下的路由
+                    const isNotAllowed = checkNotAllowed(menus, item.path)
+                    if (isNotAllowed) {
+                      return <Exception type="403" />
                     }
                     return <Component {...props} />
                   }}
