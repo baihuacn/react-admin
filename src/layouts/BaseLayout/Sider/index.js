@@ -21,6 +21,18 @@ function getMenuTrees(menus, pid = -1) {
 }
 
 class Sider extends PureComponent {
+  componentDidMount() {
+    const {
+      menus,
+      location: { pathname },
+      dispatch,
+    } = this.props
+    const found = menus.find(item => item.path === pathname)
+    if (found) {
+      const selectedKeys = [pathname]
+      dispatch(updateBaseLayoutSelectedKeys(selectedKeys))
+    }
+  }
   handleSelect = ({ selectedKeys }) => {
     const { dispatch } = this.props
     dispatch(updateBaseLayoutSelectedKeys(selectedKeys))
