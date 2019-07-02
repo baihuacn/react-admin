@@ -8,7 +8,7 @@ const {
   useEslintRc,
   addWebpackAlias,
   addLessLoader,
-  overrideDevServer
+  overrideDevServer,
 } = require('customize-cra')
 const apiMocker = require('mocker-api')
 
@@ -24,13 +24,15 @@ module.exports = {
     useBabelRc(),
     useEslintRc(),
     addWebpackAlias({
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
     }),
     addLessLoader({
-      strictMath: true,
-      noIeCompat: true,
-      localIdentName: '[local]--[hash:base64:5]'
-    })
+      javascriptEnabled: true,
+      localIdentName: '[local]--[hash:base64:5]',
+      modifyVars: {
+        'primary-color': '#2f54eb',
+      },
+    }),
   ),
-  devServer: overrideDevServer(addMocker())
+  devServer: overrideDevServer(addMocker()),
 }

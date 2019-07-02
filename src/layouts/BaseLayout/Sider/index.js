@@ -77,12 +77,12 @@ class Sider extends PureComponent {
       <div className={className} style={style}>
         <div className={styles.logo}>{title}</div>
         <Menu
+          className={styles.menu}
           openKeys={openKeys}
           selectedKeys={selectedKeys}
           onSelect={this.handleSelect}
           onOpenChange={this.handleOpenChange}
           mode="inline"
-          theme="dark"
           inlineCollapsed={collapsed}
         >
           {this.renderMenus(menuTrees)}
