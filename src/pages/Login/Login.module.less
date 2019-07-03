@@ -1,7 +1,9 @@
-.background {
+@import '~configs/variables.less';
+
+.loginBackground {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(to bottom right, #fff, #000);
+  background-image: url('~assets/images/loginBg.svg');
 }
 .root {
   position: absolute;
@@ -16,7 +18,7 @@
   text-align: center;
   font-size: 30px;
   font-weight: 700;
-  color: #fff;
+  color: @primary-6;
 }
 .submit {
   width: 100%;

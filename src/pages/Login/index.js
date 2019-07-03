@@ -36,7 +36,7 @@ class Login extends PureComponent {
 
     return (
       <>
-        <div className={styles.background} />
+        <div className={styles.loginBackground} />
         <Form onSubmit={this.handleSubmit} className={styles.root}>
           <div className={styles.title}>React Admin</div>
           <FormItem>
