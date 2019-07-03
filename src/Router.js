@@ -1,8 +1,9 @@
 import React, { Suspense, lazy, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
-import Exception from './pages/Exception'
 import routes from './configs/routes'
+
+const Exception = lazy(() => import(/* webpackChunkName: "Exception" */ './pages/Exception'))
 
 function checkNotAllowed(menus, pathname) {
   let routerMenus = []
@@ -30,8 +31,7 @@ class Router extends PureComponent {
               if (item.redirect) {
                 return <Redirect exact key={item.path} from={item.path} to={item.redirect} />
               }
-              const Component = lazy(() => import(`${item.component}`))
-              if (!Component) {
+              if (!item.component) {
                 return null
               }
               return (
@@ -43,7 +43,7 @@ class Router extends PureComponent {
                     if (item.layout) {
                       return (
                         <item.layout>
-                          <Component {...props} />
+                          <item.component {...props} />
                         </item.layout>
                       )
                     }
@@ -52,7 +52,7 @@ class Router extends PureComponent {
                     if (isNotAllowed) {
                       return <Exception type="403" />
                     }
-                    return <Component {...props} />
+                    return <item.component {...props} />
                   }}
                 />
               )
