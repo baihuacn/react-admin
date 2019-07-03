@@ -1,0 +1,40 @@
+@import '~configs/variables.less';
+
+.smallCardList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 8px;
+}
+.smallCardTitle {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 4px;
+  color: @text-color-secondary;
+}
+.smallCardData {
+  font-size: @heading-3-size;
+  color: @black;
+}
+.smallCardContent {
+  height: 46px;
+  line-height: 46px;
+}
+.smallCardFooter {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid @border-color-split;
+}
+.smallCardPercent {
+  padding: 0 8px;
+}
+.successColor {
+  font-size: @font-size-sm;
+  color: @success-color;
+}
+.errorColor {
+  font-size: @font-size-sm;
+  color: @error-color;
+}
+.mainTextColor {
+  color: @black;
+}
