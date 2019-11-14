@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Card, Tabs, DatePicker, Radio, Icon, Tooltip } from 'antd'
+import { Card, Icon, Tooltip } from 'antd'
 import styles from './Analysis.module.less'
 
 const smallCardBodyStyle = { padding: '12px 12px 8px 12px' }
