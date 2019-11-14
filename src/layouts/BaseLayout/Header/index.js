@@ -1,3 +1,6 @@
+/**
+ * @file 基础布局 > 顶部导航栏组件
+ */
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Icon, Avatar, Dropdown, Menu, Badge } from 'antd'

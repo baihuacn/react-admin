@@ -1,3 +1,6 @@
+/**
+ * @file 路由渲染
+ */
 import React, { Suspense, lazy, PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'

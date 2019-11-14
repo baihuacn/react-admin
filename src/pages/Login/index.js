@@ -1,3 +1,6 @@
+/**
+ * @file 登录页
+ */
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'

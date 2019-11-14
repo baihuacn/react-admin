@@ -1,3 +1,6 @@
+/**
+ * @file 异常页
+ */
 import React, { PureComponent } from 'react'
 import { withRouter } from 'react-router'
 import PropTypes from 'prop-types'

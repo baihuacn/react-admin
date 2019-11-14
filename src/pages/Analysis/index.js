@@ -1,3 +1,6 @@
+/**
+ * @file 信息中心 > 分析页
+ */
 import React, { PureComponent } from 'react'
 import { Card, Icon, Tooltip } from 'antd'
 import styles from './Analysis.module.less'

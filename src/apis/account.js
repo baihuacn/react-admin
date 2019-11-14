@@ -1,3 +1,6 @@
+/**
+ * @file 账户相关口
+ */
 import request from '@/utils/request'
 
 export function fetchLogin(params) {

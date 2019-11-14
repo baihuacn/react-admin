@@ -1,5 +1,5 @@
 /**
- * @description 通过customize-cra 配合react-app-rewired 覆盖create-react-app 的webpack 配置
+ * @file 通过customize-cra 配合react-app-rewired 覆盖create-react-app 的webpack 配置
  */
 const path = require('path')
 const {

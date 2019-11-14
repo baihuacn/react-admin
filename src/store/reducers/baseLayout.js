@@ -1,3 +1,6 @@
+/**
+ * @file 基础布局的reducer
+ */
 import { BASELAYOUT_UP_COLLAPSED, BASELAYOUT_UP_SELLECTEDKEYS, BASELAYOUT_UP_OPENKEYS } from '../actionTypes'
 
 const initialState = {

@@ -1,3 +1,6 @@
+/**
+ * @file 基础布局组件根文件
+ */
 import React, { PureComponent } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'

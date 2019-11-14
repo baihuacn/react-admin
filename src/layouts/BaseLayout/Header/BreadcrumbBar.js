@@ -1,3 +1,6 @@
+/**
+ * @file 基础布局 > 顶部导航栏 > 面包屑组件
+ */
 import React, { PureComponent } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -16,12 +19,8 @@ class BreadcrumbBar extends PureComponent {
       }
     })
     routes.forEach(item => {
-      if (item.path && item.name) {
-        if (breadcrumbNameMap[item.path]) {
-          breadcrumbNameMap[item.path].isRouter = true
-        } else {
-          breadcrumbNameMap[item.path] = { name: item.name }
-        }
+      if (item.path && item.component && breadcrumbNameMap[item.path]) {
+        breadcrumbNameMap[item.path].isRouter = true
       }
     })
     const pathSnippets = location.pathname.split('/').filter(i => i)

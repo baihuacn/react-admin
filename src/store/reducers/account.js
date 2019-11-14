@@ -1,3 +1,6 @@
+/**
+ * @file 账户的reducer
+ */
 import { ACCOUNT_UP_TOKEN, ACCOUNT_UP_INFO, ACCOUNT_UP_MENUS } from '../actionTypes'
 
 const initialState = {

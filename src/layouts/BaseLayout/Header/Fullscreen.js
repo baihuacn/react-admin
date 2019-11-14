@@ -1,10 +1,13 @@
+/**
+ * @file 基础布局 > 顶部导航栏 > 全屏组件
+ */
 import React, { PureComponent } from 'react'
 import { Icon } from 'antd'
 import screenfull from 'screenfull'
 
 class Fullscreen extends PureComponent {
   state = {
-    isFullscreen: false
+    isFullscreen: false,
   }
 
   handleToggleFullscreen = () => {

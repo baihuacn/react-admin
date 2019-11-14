@@ -1,3 +1,6 @@
+/**
+ * @file 基础布局 > 侧边栏组件
+ */
 import React, { PureComponent } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'

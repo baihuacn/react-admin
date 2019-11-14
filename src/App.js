@@ -1,3 +1,6 @@
+/**
+ * @file 根组件
+ */
 import React from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
