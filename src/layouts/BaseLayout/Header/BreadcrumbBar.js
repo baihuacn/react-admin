@@ -19,8 +19,12 @@ class BreadcrumbBar extends PureComponent {
       }
     })
     routes.forEach(item => {
-      if (item.path && item.component && breadcrumbNameMap[item.path]) {
-        breadcrumbNameMap[item.path].isRouter = true
+      if (item.path && item.name) {
+        if (breadcrumbNameMap[item.path]) {
+          breadcrumbNameMap[item.path].isRouter = true
+        } else {
+          breadcrumbNameMap[item.path] = { name: item.name }
+        }
       }
     })
     const pathSnippets = location.pathname.split('/').filter(i => i)
